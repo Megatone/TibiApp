@@ -8,6 +8,7 @@ import { CharactersPage } from '../pages/characters/characters';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RestProvider } from '../providers/rest/rest';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { RestProvider } from '../providers/rest/rest';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    RestProvider
+    RestProvider,
+    StorageProvider
   ]
 })
 export class AppModule { }

@@ -18,16 +18,15 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
+    <button ion-item *ngFor="let character of characters" (click)="itemTapped($event, item)">
+      <img src="{{character.icon}}" > {{character.name}}
       <div class="item-note" item-end>
-        {{item.note}}
+        {{character.level}}
       </div>
     </button>
   </ion-list>
   <div *ngIf="selectedItem" padding>
     You navigated here from
-    <b>{{selectedItem.title}}</b>
+    <b>{{selectedItem.name}}</b>
   </div>
 </ion-content>
