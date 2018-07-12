@@ -43,6 +43,7 @@ export class StorageProvider {
         image = '/assets/imgs/Outfit_Knight_Male_Addon_3.gif';
         break;
       case 'Master Sorcerer':
+        image = '/assets/imgs/Outfit_Mage_Male_Addon_3.gif';
         break;
       case 'Elite Knight':
         break;
