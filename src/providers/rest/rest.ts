@@ -5,19 +5,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RestProvider {
 
-  constructor(public http: HttpClient) {
-    //this.local = new Storage();
+  constructor(public http: HttpClient) { 
   }
-
-  public getCharactersFromLocalStorage() {
-  
-  }
-
-
-  public setCharacterToLocalStorage() {
-    localStorage.setItem('miGato', 'Juan');
-  }
-
 
   public getCharacterInformation(characterName: string) {
     return new Promise(resolve => {

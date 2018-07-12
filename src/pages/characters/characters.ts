@@ -16,6 +16,8 @@ export class CharactersPage {
     icon: string
   }> = [];
 
+  public characterNameSearch: string;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -24,14 +26,7 @@ export class CharactersPage {
   ) {
     for (let i = 0; i <= this.storage.getCharacters().length - 1; i++) {
       let characterName = this.storage.getCharacters()[i];
-      this.rest.getCharacterInformation(characterName).then(data => {
-        this.characters.push({
-          name: data.characters.data.name,
-          level: data.characters.data.level,
-          vocation: data.characters.data.vocation,
-          icon: this.storage.getIconCharacter(data)
-        })
-      });
+      this.getCharacterInformation(characterName);
     }
 
     this.selectedItem = navParams.get('item');
@@ -47,9 +42,23 @@ export class CharactersPage {
   public searching: boolean;
   public characterName: string;
 
+  public getCharacterInformation(characterName: string) {
+    this.rest.getCharacterInformation(characterName).then((data: any) => {
+      this.characters.push({
+        name: data.characters.data.name,
+        level: data.characters.data.level,
+        vocation: data.characters.data.vocation,
+        icon: this.storage.getIconCharacter(data)
+      })
+    });
+  }
+
+
   public searchCharacter(event) {
-    console.log(event);
-    this.rest.setCharacterToLocalStorage();
+    if (event.keyCode === 13) {
+      this.characters = [];
+      this.getCharacterInformation(this.characterNameSearch);
+    }
   }
 
 }

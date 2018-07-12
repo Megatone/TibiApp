@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { MyApp } from './app.component';
 import { CharactersPage } from '../pages/characters/characters';
+import { CharacterDetailPage } from '../pages/character-detail/character-detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -13,7 +14,8 @@ import { StorageProvider } from '../providers/storage/storage';
 @NgModule({
   declarations: [
     MyApp,
-    CharactersPage
+    CharactersPage,
+    CharacterDetailPage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { StorageProvider } from '../providers/storage/storage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    CharactersPage
+    CharactersPage,
+    CharacterDetailPage
   ],
   providers: [
     StatusBar,

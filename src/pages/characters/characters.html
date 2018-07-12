@@ -4,7 +4,7 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="!searching">Characters</ion-title>
-    <ion-searchbar (ionInput)="searchCharacter($event)" [(ngModel)]="characterName" *ngIf="searching" placeholder="Character Name"></ion-searchbar>
+    <ion-searchbar (keypress)="searchCharacter($event)" [(ngModel)]="characterNameSearch" *ngIf="searching" placeholder="Character Name"></ion-searchbar>
 
 
     <ion-buttons end>
