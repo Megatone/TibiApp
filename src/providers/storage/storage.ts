@@ -29,7 +29,7 @@ export class StorageProvider {
   }
 
   public getIconCharacter(character: any): string {
-
+    let image: string = ''
     switch (character.characters.data.vocation) {
       case 'Knight':
         break;
@@ -40,7 +40,7 @@ export class StorageProvider {
       case 'Druid':
         break;
       case 'Royal Paladin':
-        return '/imgs/Outfit_Knight_Male_Addon_3.png'
+        image = '/assets/imgs/Outfit_Knight_Male_Addon_3.gif';
         break;
       case 'Master Sorcerer':
         break;
@@ -49,6 +49,6 @@ export class StorageProvider {
       case 'Elder Druid':
         break;
     }
-    return '';
+    return image;
   }
 }

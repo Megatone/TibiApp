@@ -19,10 +19,18 @@
 <ion-content>
   <ion-list>
     <button ion-item *ngFor="let character of characters" (click)="itemTapped($event, item)">
-      <img src="{{character.icon}}" > {{character.name}}
-      <div class="item-note" item-end>
-        {{character.level}}
-      </div>
+      <img src="{{character.icon}}" style="float:left;width:36px">
+      <table style="float:left;width:fit-content;margin-left:1.5em">
+        <tr>
+          <td colspan="2">
+            <b>{{character.name}}</b>
+          </td>
+        </tr>
+        <tr>
+          <td><b>Level:</b>{{character.level}}</td>
+          <td>&nbsp;<b>Vocation:</b>{{character.vocation}}</td>
+        </tr>
+      </table>
     </button>
   </ion-list>
   <div *ngIf="selectedItem" padding>
