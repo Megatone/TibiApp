@@ -5,6 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 
 import { CharactersPage } from '../pages/characters/characters';
+import { HighscoresPage } from '../pages/highscores/highscores';
+import { HousesPage } from '../pages/houses/houses';
+import { WorldsPage } from '../pages/worlds/worlds';
+import { GuildsPage } from '../pages/guilds/guilds';
 
 @Component({
   templateUrl: 'app.html'
@@ -14,14 +18,18 @@ export class MyApp {
 
   rootPage: any = CharactersPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [     
-      { title: 'Characters', component: CharactersPage }
+    this.pages = [
+      { title: 'Characters', component: CharactersPage },
+      { title: 'Guilds', component: GuildsPage },
+      { title: 'Worlds', component: WorldsPage },
+      { title: 'Highscores', component: HighscoresPage },
+      { title: 'Houses', component: HousesPage }
     ];
 
   }
@@ -32,6 +40,12 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      if (this.platform.is('core') || this.platform.is('mobileweb')) {
+        localStorage.setItem('isApp', '0');
+      } else {
+        localStorage.setItem('isApp', '1');
+      }
+
     });
   }
 

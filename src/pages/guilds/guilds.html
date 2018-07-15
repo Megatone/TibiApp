@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-select [(ngModel)]="world" (ionChange)="onSelectChangeWordl($event)" interface="action-sheet">
+        <ion-option *ngFor="let _world of worlds" [value]="_world.name">{{_world.name}}</ion-option>
+    </ion-select>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor="let guild of guilds">
+      <img src="{{guild.guildlogo}}">
+      <h2>{{guild.name}}</h2>
+      <button ion-button clear item-end (click)="openGuild(guild)">View</button>
+    </button>
+  </ion-list>
+  <ion-fab>
+    <button ion-fab color="primary" (click)="selectFilter()">
+      <ion-icon name="funnel"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-item [hidden]="true">
+    <ion-label>Order By</ion-label>
+    <ion-select [(ngModel)]="filter"  (ionChange)="onSelectChangeFilter($event)" interface="action-sheet">
+      <ion-option *ngFor="let _filter of filters" [value]="_filter.name">{{_filter.name}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-content>

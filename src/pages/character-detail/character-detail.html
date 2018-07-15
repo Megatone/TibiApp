@@ -1,18 +1,107 @@
-<!--
-  Generated template for the CharacterDetailPage page.
+<ion-header >
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>characterDetail</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Character Detail</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="favotireChange()">
+        <ion-icon name="star" *ngIf="isFavorite"></ion-icon>
+        <ion-icon name="star-outline" *ngIf="!isFavorite"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content padding *ngIf="character !== null" style="margin-top: 56px;"  id="listScroll">
+  <ion-refresher (ionRefresh)="loadPage()" [hidden]="refresher !== undefined && refresher.state === 'refreshing'">
+    <ion-refresher-content pullingIcon="sync" refreshingIcon="sync"></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
 
-<ion-content padding>
+    <ion-row>
+      <ion-col col-2>
+        <img src="{{characterParam.icon}}">
+      </ion-col>
+      <ion-col col-10 class="header-char">
+        <span class="name">{{characterParam.Name}}</span>
+        <br> {{character.characters.data.level}} - {{character.characters.data.vocation}}
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-list>
+          <h1>Character Information</h1>
+          <ion-item>
+            <p>
+              <b>Name :</b> {{character.characters.data.name}}
+            </p>
+            <p>
+              <b> Sex :</b> {{character.characters.data.sex}}
+            </p>
+            <p>
+              <b> Vocation : </b> {{character.characters.data.vocation}}
+            </p>
+            <p>
+              <b>Level : </b> {{character.characters.data.level}}
+            </p>
+            <p>
+              <b> Archivement Points : </b> {{character.characters.data.achievement_points}}
+            </p>
+            <p>
+              <b>World : </b> {{character.characters.data.world}}
+            </p>
+            <p>
+              <b> Residence : </b> {{character.characters.data.residence}}
+            </p>
+            <p *ngIf="character.characters.data.house !== undefined">
+              <b> House : </b> {{character.characters.data.house.name }} ({{character.characters.data.house.town }})
+            </p>
+            <p *ngIf="character.characters.data.house === undefined">
+              <b>House : </b> -
+            </p>
+            <p *ngIf="character.characters.data.guild !== undefined">
+              <b>Guild : </b>{{character.characters.data.guild.name}}
+            </p>
+            <p *ngIf="character.characters.data.guild === undefined">
+              <b>Guild : </b> -
+            </p>
+            <p>
+              <b>Last Login : </b>{{character.characters.data.last_login[0].date.split('.')[0]}}
+            </p>
+            <p>
+              <b>Account Status : </b>{{character.characters.data.account_status}}
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-list>
+          <h1> Character Deaths</h1>
+          <ion-item *ngFor="let death of character.characters.deaths">
+            <h2> {{death.date.date.split('.')[0]}} at level {{death.level}}</h2>
+            <p> {{death.reason}}</p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col col-12>
+        <ion-list>
+          <h1> Other Characters</h1>
+          <ion-item *ngFor="let character of character.characters.other_characters">
+            <h2> {{character.name}}</h2>
+            <p>{{character.world}} - {{character.status}}</p>
+            <button ion-button clear item-end (click)="openCharacter(character)">View</button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>

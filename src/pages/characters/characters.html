@@ -1,14 +1,12 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title *ngIf="!searching">Characters</ion-title>
     <ion-searchbar (keypress)="searchCharacter($event)" [(ngModel)]="characterNameSearch" *ngIf="searching" placeholder="Character Name"></ion-searchbar>
-
-
     <ion-buttons end>
-      <button ion-button icon-only (click)="searching = !searching">
+      <button ion-button icon-only (click)="searchingChange() ">
         <ion-icon name="search" *ngIf="!searching"></ion-icon>
         <ion-icon name="close" *ngIf="searching"></ion-icon>
       </button>
@@ -17,24 +15,36 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="loadPage()" [hidden]="refresher !== undefined && refresher.state === 'refreshing'">
+    <ion-refresher-content pullingIcon="sync" refreshingIcon="sync"></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
-    <button ion-item *ngFor="let character of characters" (click)="itemTapped($event, item)">
-      <img src="{{character.icon}}" style="float:left;width:36px">
+    <button ion-item *ngFor="let character of characters" (click)="itemTapped($event, character)">
+      <img src="{{character.icon}}">
       <table style="float:left;width:fit-content;margin-left:1.5em">
         <tr>
-          <td colspan="2">
-            <b>{{character.name}}</b>
+          <td>
+            <b>{{character.Name}}</b>
           </td>
         </tr>
         <tr>
-          <td><b>Level:</b>{{character.level}}</td>
-          <td>&nbsp;<b>Vocation:</b>{{character.vocation}}</td>
+          <td style="font-size:14px;">
+            {{character.Level}} - {{character.Vocation}} - ({{character.World}})
+          </td>
         </tr>
       </table>
+      <button ion-button clear item-end [style.color]="character.Online === 'offline' ?'grey' : 'lime'">{{character.Online}}</button>
     </button>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from
-    <b>{{selectedItem.name}}</b>
-  </div>
+  <ion-fab>
+    <button ion-fab color="primary" (click)="selectFilter()">
+      <ion-icon name="funnel"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-item [hidden]="true">
+    <ion-label>Order By</ion-label>
+    <ion-select [(ngModel)]="filter"  (ionChange)="onSelectChange($event)" interface="action-sheet">
+      <ion-option *ngFor="let _filter of filters" [value]="_filter.name">{{_filter.name}}</ion-option>
+    </ion-select>
+  </ion-item>
 </ion-content>
