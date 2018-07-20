@@ -82,7 +82,7 @@
         <ion-list>
           <h1> Character Deaths</h1>
           <ion-item *ngFor="let death of character.characters.deaths">
-            <h2> {{death.date.date.split('.')[0]}} at level {{death.level}}</h2>
+            <h2> {{death.date.date.split('.')[0]}} at gitlevel {{death.level}}</h2>           
             <p> {{death.reason}}</p>
           </ion-item>
         </ion-list>
@@ -94,7 +94,7 @@
         <ion-list>
           <h1> Other Characters</h1>
           <ion-item *ngFor="let character of character.characters.other_characters">
-            <h2> {{character.name}}</h2>
+            <h2> {{character.name}}</h2>            
             <p>{{character.world}} - {{character.status}}</p>
             <button ion-button clear item-end (click)="openCharacter(character)">View</button>
           </ion-item>
